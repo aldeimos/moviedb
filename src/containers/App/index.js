@@ -1,6 +1,11 @@
 import React, { useEffect } from 'react';
 import * as API from '../../api';
 
+import { Header } from '../../components/Header';
+import {Welcome} from '../Welcome';
+
+import './index.scss';
+
 export const App = () => {
 
     useEffect(() => {
@@ -9,8 +14,11 @@ export const App = () => {
     });
 
     return (
-        <div>
-            <h1>Привет мир</h1>
-        </div>
+        <>
+            <Header/>
+            <div className="container">
+              <Welcome/>
+            </div>
+        </>
     )
 };
