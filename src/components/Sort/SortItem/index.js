@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import './index.scss';
+
 export const SortItem = ({title, handler}) => {
     const dummyHandler = () => {
         console.log('dummy');

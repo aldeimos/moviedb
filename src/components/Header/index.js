@@ -12,13 +12,13 @@ export const Header = () => {
           <div className="header__logo">
             <img
               src={logo}
-              alt="Логотип"
+              alt="Logo"
               width={154}
               height={20}
             />
           </div>
           <div className="header__profile">
-            <img src={userPic} alt="user picture"/>
+            <img src={userPic} alt="User Avatar"/>
             Nickname
           </div>
         </div>

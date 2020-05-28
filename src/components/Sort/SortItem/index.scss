@@ -1,0 +1,10 @@
+.sort-item {
+  font-weight: bold;
+  color: var(--primary-text-color);
+
+  cursor: pointer;
+
+  &_active {
+    color: var(--filter-active);
+  }
+}

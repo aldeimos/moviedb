@@ -1,5 +1,21 @@
 .welcome {
   padding: 20px 10px;
 
-  background-color: var(--accent-color);
+  &__controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+
+    border-bottom: 1px solid var(--primary-color-dark);
+  }
+
+  &__sort {
+    margin-bottom: 40px;
+  }
+
+  &__content {
+    background-color: var(--primary-color-dark);
+  }
 }

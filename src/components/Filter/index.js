@@ -1,5 +1,7 @@
 import React from 'react';
-import {FilterItem} from "./FilterItem";
+import { FilterItem } from './FilterItem';
+
+import './index.scss';
 
 export const Filter = () => {
 

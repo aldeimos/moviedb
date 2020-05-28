@@ -1,7 +1,7 @@
 body {
   margin: 0;
 
-  --primary-color-dark: #512DA8;
+  --primary-color-dark: #4300a8;
   --primary-color: #673AB7;
   --primary-color-light: #D1C4E9;
   --primary-color-text: #FFFFFF;
@@ -9,8 +9,9 @@ body {
   --primary-text-color: #212121;
   --secondary-text-color: #757575;
   --divider-color: #BDBDBD;
+  --filter-active: darkturquoise;
 
-  background-color: var(--primary-color-light);
+  background: var(--primary-color-light);
 
 }
 
