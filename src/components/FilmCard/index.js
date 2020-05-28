@@ -1,15 +1,28 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import './index.scss';
+
 export const FilmCard = ({title, release_date, poster_path, vote_average, runtime, genres, overview}) => {
+
+    const chooseRatingClass = () => {
+      if (vote_average >= 7) {
+        return 'film-card__rating_high'
+      } else if (vote_average < 7 && vote_average > 4) {
+        return 'film-card__rating_medium';
+      } else {
+        return 'film-card__rating_medium'
+      }
+    };
+
     return (
         <div className="film-card">
             <div className="film-card__poster">
-                <img src={poster_path} alt="Film's Poster"/>
+                <img src={`https://image.tmdb.org/t/p/w300_and_h450_bestv2/${poster_path}`} alt="Film's Poster"/>
             </div>
             <div className="film-card__title">
-                {title}
-                <span className="film-card__raging">
+                <h3>{title}</h3>
+                <span className={`film-card__rating ${chooseRatingClass()}` }>
                     {vote_average}
                 </span>
             </div>
@@ -25,7 +38,7 @@ export const FilmCard = ({title, release_date, poster_path, vote_average, runtim
                 </div>
             </div>
             <div className="film-card__desc">
-                {overview}
+                {overview.slice(0, 200)}...
             </div>
         </div>
     )

@@ -25,7 +25,8 @@ const films = (state = initialState, action) => {
       return {
         ...state,
         favorites_films: state.favorites_films.filter((stateFilm) => stateFilm.id !== filmId)
-      }
+      };
+    default: return state;
   }
 };
 

@@ -1,0 +1,47 @@
+.film-card {
+  max-width: 300px;
+
+  color: var(--primary-text-color);
+
+  &__poster {
+    max-height: 450px;
+    margin-bottom: 10px;
+
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+  }
+
+  &__title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    font-size: 24px;
+
+    h3 {
+      max-width: 230px;
+      margin: 0;
+
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+  }
+
+  &__rating {
+
+    &_high {
+      color: #1cc11c;
+    }
+
+    &_medium {
+      color: #f8f823;
+    }
+
+    &_low {
+      color: red;
+    }
+  }
+}
