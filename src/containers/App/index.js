@@ -1,24 +1,25 @@
-import React, { useEffect } from 'react';
-import * as API from '../../api';
+import React from 'react';
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 
 import { Header } from '../../components/Header';
-import {Welcome} from '../Welcome';
+import { Welcome } from '../Welcome';
+import { FilmDetails } from '../FilmDetails';
 
 import './index.scss';
 
 export const App = () => {
-
-    useEffect(() => {
-        API.getMovie()
-            .then(data => console.log(data));
-    });
-
     return (
-        <>
-            <Header/>
-            <div className="container">
-              <Welcome/>
-            </div>
-        </>
+           <Router>
+             <Header/>
+             <div className="container">
+               <Switch>
+                 <Route path="/" exact>
+                   <Welcome/>
+                 </Route>
+                 <Route path="/details/:id" exact component={FilmDetails}/>
+                 <Redirect from="/details" to="/"/>
+               </Switch>
+             </div>
+           </Router>
     )
 };

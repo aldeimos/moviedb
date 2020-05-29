@@ -1,26 +1,45 @@
-import React, {useEffect} from 'react';
+import React, { useEffect, useState } from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {loadPopular} from '../../store/films/actionCreators';
+import {loadGenres, loadMorePopular, loadPopular} from '../../store/films/actionCreators';
 import * as API from '../../api';
 
 import { Filter } from '../../components/Filter';
 import { SearchBar } from '../../components/SearchBar';
 import { Sort } from '../../components/Sort';
-import { FilmCard } from '../../components/FilmCard';
+import { Popular } from '../../components/Popular';
+import { Favorites } from '../../components/Favorites';
+import { Loader } from '../../components/Loader';
 
 
 import './index.scss'
 
 export const Welcome = () => {
+  const [loadedPage, setLoadedPage] = useState(1);
+  const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
-  const popularFilms = useSelector((store) => store.films.popular_films);
-
-  console.log(popularFilms);
+  const filterMode = useSelector((store) => store.films.filterMode);
+  const genres = useSelector((store) => store.films.genres);
 
   useEffect(() => {
-    API.getPopularFilms()
-      .then((popular_films) => dispatch(loadPopular(popular_films.results)));
+    setLoading(true);
+    API.getPopularFilms(loadedPage)
+      .then((popular_films) => {
+        setLoading(false);
+        dispatch(loadPopular(popular_films.results));
+      });
+    API.getGenres().then(genres => dispatch(loadGenres(genres.genres)));
   }, []);
+
+
+  const loadMore = (page) => {
+    setLoadedPage(page);
+    setLoading(true);
+    API.getPopularFilms(page)
+      .then((popular_films) => {
+        setLoading(false);
+        dispatch(loadMorePopular(popular_films.results));
+      });
+  };
 
   return (
     <div className="welcome">
@@ -35,20 +54,23 @@ export const Welcome = () => {
       <div className="welcome__sort">
         <Sort/>
       </div>
-      <section className="welcome__content">
-        {popularFilms.length !== 0 ?
-          popularFilms.map((film) => <FilmCard
-                                      key={film.id}
-                                      vote_average={film.vote_average}
-                                      release_date={film.release_date}
-                                      overview={film.overview}
-                                      poster_path={film.poster_path}
-                                      title={film.title}
-                                      runtime={film.runtime}
-                                      genres={film.genre_ids}/>) :
-          <div>Тут пусто</div>
+      <div className="welcome__content">
+        {loading ?
+          <Loader/> :
+          filterMode === 'popular' ?
+            <Popular genres={genres}/> :
+            <Favorites genres={genres}/>
         }
-      </section>
+      </div>
+      {filterMode === 'popular' &&
+        <button
+          className="welcome__show-more"
+          type="button"
+          onClick={() => loadMore(loadedPage + 1)}
+        >
+          Show more
+        </button>
+      }
     </div>
   )
 };
