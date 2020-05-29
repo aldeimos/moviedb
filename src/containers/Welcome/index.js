@@ -5,11 +5,11 @@ import * as API from '../../api';
 
 import { Filter } from '../../components/Filter';
 import { SearchBar } from '../../components/SearchBar';
-import {Sort} from '../../components/Sort';
+import { Sort } from '../../components/Sort';
+import { FilmCard } from '../../components/FilmCard';
 
 
 import './index.scss'
-import {FilmCard} from "../../components/FilmCard";
 
 export const Welcome = () => {
   const dispatch = useDispatch();
@@ -38,6 +38,7 @@ export const Welcome = () => {
       <section className="welcome__content">
         {popularFilms.length !== 0 ?
           popularFilms.map((film) => <FilmCard
+                                      key={film.id}
                                       vote_average={film.vote_average}
                                       release_date={film.release_date}
                                       overview={film.overview}

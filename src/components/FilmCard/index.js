@@ -21,9 +21,9 @@ export const FilmCard = ({title, release_date, poster_path, vote_average, runtim
                 <img src={`https://image.tmdb.org/t/p/w300_and_h450_bestv2/${poster_path}`} alt="Film's Poster"/>
             </div>
             <div className="film-card__title">
-                <h3>{title}</h3>
+                <h3>{title} |</h3>
                 <span className={`film-card__rating ${chooseRatingClass()}` }>
-                    {vote_average}
+                  {vote_average}
                 </span>
             </div>
             <div className="film-card__info">
