@@ -3,15 +3,12 @@ import PropTypes from 'prop-types';
 
 import './index.scss';
 
-export const SortItem = ({title, handler}) => {
-    const dummyHandler = () => {
-        console.log('dummy');
-    };
+export const SortItem = ({title, handler, active}) => {
 
     return (
         <div
-            className="sort-item"
-            onClick={dummyHandler}
+          className={`sort-item ${active && 'sort-item_active'}`}
+            onClick={handler}
         >
             {title}
         </div>

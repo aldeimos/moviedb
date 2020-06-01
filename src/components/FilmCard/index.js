@@ -27,14 +27,15 @@ export const FilmCard = ({id, title, release_date, poster_path, vote_average, ge
       }
     };
 
-    const favoriteManage = () => {
+    const favoriteManage = (e) => {
+      e.preventDefault();
+
       if (isFavorite) {
-        console.log('kek');
         dispatch(deleteFromFavorites(id));
         setIsFavorite(false);
         return;
       }
-      console.log('puk')
+
       dispatch(addToFavorites({
         id,
         title,

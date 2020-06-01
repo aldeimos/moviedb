@@ -1,0 +1,45 @@
+.film-details {
+  display: flex;
+  flex-wrap: wrap;
+
+  &__poster {
+    width: 40%;
+  }
+
+  &__content {
+    width: calc(50% - 50px);
+    margin-left: 50px;
+  }
+
+  &__title {
+    font-size: 48px;
+  }
+
+  &__tagline {
+    margin-bottom: 40px;
+
+    font-size: 24px;
+    font-style: italic;
+  }
+
+  &__paragraph {
+    margin-bottom: 20px;
+    padding-bottom: 5px;
+
+    font-size: 20px;
+    border-bottom: 2px solid var(--accent-color)
+  }
+
+  &__overview {
+    margin-top: 40px;
+
+    font-size: 26px;
+
+    p {
+      margin-bottom: 10px;
+
+      font-size: 24px;
+      font-weight: bold;
+    }
+  }
+}

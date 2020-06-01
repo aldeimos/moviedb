@@ -54,6 +54,12 @@ const films = (state = initialState, action) => {
         ...state,
         filterMode
       };
+    case types.SET_SORT_MODE:
+      const { sortMode } = action;
+      return {
+        ...state,
+        sortMode
+      };
     default: return state;
   }
 };

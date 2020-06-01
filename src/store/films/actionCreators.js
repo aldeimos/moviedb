@@ -48,3 +48,10 @@ export const setFilterMode = (filterMode) => {
     filterMode
   }
 };
+
+export const setSortMode = (sortMode) => {
+  return {
+    type: types.SET_SORT_MODE,
+    sortMode
+  }
+};

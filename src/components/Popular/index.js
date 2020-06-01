@@ -8,7 +8,7 @@ export const Popular = ({genres}) => {
   const dispatch = useDispatch();
   const popularFilms = useSelector((store) => store.films.popular_films);
   const favoritesFilms = useSelector((store) => store.films.favorites_films);
-
+  console.log(popularFilms);
 
   return (
     <>
