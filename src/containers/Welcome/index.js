@@ -12,14 +12,12 @@ import { Loader } from '../../components/Loader';
 
 
 import './index.scss'
-import { sortFilms } from '../../utils/sortingFilms';
 
 export const Welcome = () => {
   const [loadedPage, setLoadedPage] = useState(1);
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const filterMode = useSelector((store) => store.films.filterMode);
-  const sortMode = useSelector((store) => store.films.sortMode);
   const genres = useSelector((store) => store.films.genres);
 
   useEffect(() => {
@@ -27,9 +25,9 @@ export const Welcome = () => {
     API.getPopularFilms(loadedPage)
       .then((popular_films) => {
         setLoading(false);
-        dispatch(loadPopular(sortFilms(popular_films.results, sortMode)));
+        dispatch(loadPopular(popular_films.results));
       });
-  }, [sortMode]);
+  }, []);
 
   useEffect(() => {
     API.getGenres().then(genres => dispatch(loadGenres(genres.genres)));
