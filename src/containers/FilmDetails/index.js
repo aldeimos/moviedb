@@ -38,8 +38,11 @@ export const FilmDetails = ({match}) => {
         <p className="film-details__paragraph film-details__genres">Genres: {genres && genres.map((genre) => genre.name).join(', ')}</p>
       </div>
       <div className="film-details__overview">
-        <p>Description</p>
+        <h3>Description:</h3>
         {overview}
+      </div>
+      <div className="film-details__recommended-films">
+        <h3>Recommended films:</h3>
       </div>
     </div>
   )

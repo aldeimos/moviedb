@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {setFilterMode} from '../../store/films/actionCreators';
+import {setFilterMode, setSortMode} from '../../store/films/actionCreators';
 import { FilterItem } from './FilterItem';
 
 import './index.scss';
@@ -11,6 +11,7 @@ export const Filter = () => {
 
     const changeFilterMode = (mode) => {
       dispatch(setFilterMode(mode));
+      dispatch(setSortMode('default'));
     };
 
     return (

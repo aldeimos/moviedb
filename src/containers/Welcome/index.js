@@ -17,7 +17,10 @@ export const Welcome = () => {
   const [loadedPage, setLoadedPage] = useState(1);
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
+  const favoritesFilms = JSON.parse(localStorage.getItem('favorites_films'));
   const filterMode = useSelector((store) => store.films.filterMode);
+  const sortMode = useSelector((store) => store.films.sortMode);
+  const searchValue = useSelector((store) => store.films.searchValue);
   const genres = useSelector((store) => store.films.genres);
 
   useEffect(() => {
@@ -61,8 +64,18 @@ export const Welcome = () => {
         {loading ?
           <Loader/> :
           filterMode === 'popular' ?
-            <Popular genres={genres}/> :
-            <Favorites genres={genres}/>
+            <Popular
+              favoritesFilms={favoritesFilms}
+              sortMode={sortMode}
+              searchValue={searchValue}
+              genres={genres}
+            /> :
+            <Favorites
+              favoritesFilms={favoritesFilms}
+              sortMode={sortMode}
+              searchValue={searchValue}
+              genres={genres}
+            />
         }
       </div>
       {filterMode === 'popular' &&

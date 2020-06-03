@@ -5,20 +5,19 @@ import { FilmCard } from '../FilmCard';
 import './index.scss';
 import { sortFilms } from '../../utils/sortingFilms';
 
-export const Popular = ({genres}) => {
-  const dispatch = useDispatch();
+export const Popular = ({genres, favoritesFilms, sortMode, searchValue}) => {
   const popularFilms = useSelector((store) => store.films.popular_films);
-  const favoritesFilms = useSelector((store) => store.films.favorites_films);
-  const sortMode = useSelector((store) => store.films.sortMode);
 
-  console.log(popularFilms);
 
   const sortedFilms = sortFilms(popularFilms, sortMode);
 
   return (
     <>
-      {sortedFilms.length !== 0 ?
-        sortedFilms.map((film) => <FilmCard
+      {sortedFilms
+        .filter((film) => film.title.toLowerCase().includes(searchValue.toLowerCase())).length !== 0 ?
+        sortedFilms
+          .filter((film) => film.title.toLowerCase().includes(searchValue.toLowerCase()))
+          .map((film) => <FilmCard
           key={film.id}
           id={film.id}
           vote_average={film.vote_average}
@@ -30,7 +29,7 @@ export const Popular = ({genres}) => {
           genreIds={film.genre_ids}
           genres={genres}
           favoritesFilms={favoritesFilms}/>) :
-          <div>loader</div>
+          <div>Unfortunately we did not find anything :(</div>
       }
     </>
   )

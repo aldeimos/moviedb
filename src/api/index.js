@@ -7,7 +7,6 @@ export const getMovie = async (movieId) => {
 };
 
 export const getPopularFilms = async (page = 1) => {
-    console.log(page);
     return fetch(`${BASE_END_POINT}movie/popular?api_key=${API_KEY}&page=${page}`)
       .then((response) => response.json());
 };

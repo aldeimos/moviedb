@@ -55,3 +55,10 @@ export const setSortMode = (sortMode) => {
     sortMode
   }
 };
+
+export const setSearchValue = (searchValue) => {
+  return {
+    type: types.SET_SEARCH_VALUE,
+    searchValue
+  }
+};

@@ -6,6 +6,7 @@ import { Welcome } from '../Welcome';
 import { FilmDetails } from '../FilmDetails';
 
 import './index.scss';
+import 'materialize-css';
 
 export const App = () => {
     return (

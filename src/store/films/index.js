@@ -2,11 +2,12 @@ import * as types from './actions';
 
 const initialState = {
   popular_films: [],
-  favorites_films: [],
+  favorites_films: JSON.parse(localStorage.getItem('favorites_films') || "[]"),
   genres: [],
   film_details: {},
   filterMode: 'popular',
-  sortMode: 'default'
+  sortMode: 'default',
+  searchValue: ''
 };
 
 
@@ -38,15 +39,19 @@ const films = (state = initialState, action) => {
       };
     case types.ADD_TO_FAVORITES:
       const { film } = action;
+      const added = [...state.favorites_films, film];
+      localStorage.setItem('favorites_films', JSON.stringify(added));
       return {
         ...state,
-        favorites_films: [...state.favorites_films, film]
+        favorites_films: added
       };
     case types.DELETE_FROM_FAVORITES:
       const { filmId } = action;
+      const deleted = state.favorites_films.filter((stateFilm) => stateFilm.id !== filmId);
+      localStorage.setItem('favorites_films', JSON.stringify(deleted));
       return {
         ...state,
-        favorites_films: state.favorites_films.filter((stateFilm) => stateFilm.id !== filmId)
+        favorites_films: deleted
       };
     case types.SET_FILTER_MODE:
       const { filterMode } = action;
@@ -59,6 +64,12 @@ const films = (state = initialState, action) => {
       return {
         ...state,
         sortMode
+      };
+    case types.SET_SEARCH_VALUE:
+      const { searchValue } = action;
+      return {
+        ...state,
+        searchValue
       };
     default: return state;
   }

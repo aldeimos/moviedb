@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import {addToFavorites, deleteFromFavorites} from '../../store/films/actionCreators';
 import {NavLink} from 'react-router-dom';
@@ -9,7 +9,8 @@ import './index.scss';
 import favorite_off from '../../assets/favorite_off.svg';
 import favorite_on from '../../assets/favorite_on.svg';
 
-export const FilmCard = ({id, title, release_date, poster_path, vote_average, genres, genreIds, overview, favoritesFilms}) => {
+export const FilmCard = ({id, title, release_date, poster_path, vote_average, genres, genreIds, overview, }) => {
+    const favoritesFilms = JSON.parse(localStorage.getItem('favorites_films') || "[]");
     const dispatch = useDispatch();
     const [isFavorite, setIsFavorite] = useState(
       favoritesFilms.filter((favFilm) => favFilm.id === id).length !== 0
@@ -32,7 +33,9 @@ export const FilmCard = ({id, title, release_date, poster_path, vote_average, ge
 
       if (isFavorite) {
         dispatch(deleteFromFavorites(id));
+
         setIsFavorite(false);
+        window.M.toast({ html: 'Фильм удален из избранного' });
         return;
       }
 
@@ -47,6 +50,7 @@ export const FilmCard = ({id, title, release_date, poster_path, vote_average, ge
         overview,
       }));
       setIsFavorite(true);
+      window.M.toast({ html: 'Фильм добавлен в избранное' })
     };
 
     useEffect(() => {
