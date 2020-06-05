@@ -1,16 +1,20 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { loadFilmDetails } from '../../store/films/actionCreators';
 import * as API from '../../api';
 
-import './index.scss';
+import {RecommendedFilm} from '../../components/RecommendedFilm';
 
+import './index.scss';
 import * as parseDetails from '../../utils/parseFilmsDetails';
+import { shuffleArray } from '../../utils/shuffleArray';
 
 export const FilmDetails = ({match}) => {
   const dispatch = useDispatch();
+  const [recommendedList, setRecommendedList] = useState([]);
   const detailedFilm = useSelector((store) => store.films.film_details);
-  const { title, tagline, runtime, budget, genres, revenue, release_date, vote_average, poster_path, overview } = detailedFilm;
+  const popularFilms = useSelector((store) => store.films.popular_films);
+  const { id, title, tagline, runtime, budget, genres, revenue, release_date, vote_average, poster_path, overview } = detailedFilm;
 
   console.log(detailedFilm);
 
@@ -18,6 +22,15 @@ export const FilmDetails = ({match}) => {
     API.getMovie(match.params.id)
       .then((details) => dispatch(loadFilmDetails(details)));
   }, []);
+
+  const mapRecommendedFilms = () => {
+    return popularFilms.filter((film) => {
+      if (film.id !== id) {
+        return film.genre_ids.includes(shuffleArray(genres)[0].id);
+      }
+    });
+  };
+
 
 
   return (
@@ -43,6 +56,7 @@ export const FilmDetails = ({match}) => {
       </div>
       <div className="film-details__recommended-films">
         <h3>Recommended films:</h3>
+        {detailedFilm.genres && mapRecommendedFilms().map((recFilm) => <RecommendedFilm {...recFilm}/>)}
       </div>
     </div>
   )

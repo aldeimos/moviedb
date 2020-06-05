@@ -13,9 +13,8 @@ import { Loader } from '../../components/Loader';
 
 import './index.scss'
 
-export const Welcome = () => {
+export const Welcome = ({loading, setLoading}) => {
   const [loadedPage, setLoadedPage] = useState(1);
-  const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const favoritesFilms = JSON.parse(localStorage.getItem('favorites_films'));
   const filterMode = useSelector((store) => store.films.filterMode);
@@ -23,18 +22,6 @@ export const Welcome = () => {
   const searchValue = useSelector((store) => store.films.searchValue);
   const genres = useSelector((store) => store.films.genres);
 
-  useEffect(() => {
-    setLoading(true);
-    API.getPopularFilms(loadedPage)
-      .then((popular_films) => {
-        setLoading(false);
-        dispatch(loadPopular(popular_films.results));
-      });
-  }, []);
-
-  useEffect(() => {
-    API.getGenres().then(genres => dispatch(loadGenres(genres.genres)));
-  }, []);
 
 
   const loadMore = (page) => {
@@ -46,6 +33,8 @@ export const Welcome = () => {
         dispatch(loadMorePopular(popular_films.results));
       });
   };
+
+  console.log(loading);
 
   return (
     <div className="welcome">
@@ -79,6 +68,7 @@ export const Welcome = () => {
         }
       </div>
       {filterMode === 'popular' &&
+      !loading &&
         <button
           className="welcome__show-more"
           type="button"
