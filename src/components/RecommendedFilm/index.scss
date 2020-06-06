@@ -1,0 +1,19 @@
+.recommended-film {
+  
+  &__title {
+    font-size: 20px;
+    font-weight: 600;
+  }
+
+  &__poster {
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+  }
+
+  &:hover {
+    .recommended-film__poster {
+      transform: scale(1.2);
+      transition: all 0.2s ease-in-out;
+    }
+  }
+}

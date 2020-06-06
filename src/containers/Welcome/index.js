@@ -16,7 +16,7 @@ import './index.scss'
 export const Welcome = ({loading, setLoading}) => {
   const [loadedPage, setLoadedPage] = useState(1);
   const dispatch = useDispatch();
-  const favoritesFilms = JSON.parse(localStorage.getItem('favorites_films'));
+  const favoritesFilms = JSON.parse(localStorage.getItem('favorites_films') || "[]");
   const filterMode = useSelector((store) => store.films.filterMode);
   const sortMode = useSelector((store) => store.films.sortMode);
   const searchValue = useSelector((store) => store.films.searchValue);
@@ -33,8 +33,6 @@ export const Welcome = ({loading, setLoading}) => {
         dispatch(loadMorePopular(popular_films.results));
       });
   };
-
-  console.log(loading);
 
   return (
     <div className="welcome">

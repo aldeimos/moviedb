@@ -7,9 +7,11 @@ export const Favorites = ({genres, favoritesFilms, sortMode, searchValue}) => {
 
   const sortedFilms = sortFilms(favoritesFilms, sortMode);
 
+  console.log(sortedFilms, 'sorted films at favorites')
+
   return (
     <>
-      {sortedFilms
+      {sortedFilms && sortedFilms
         .filter((film) => film.title.toLowerCase().includes(searchValue.toLowerCase())).length !== 0 ?
         sortedFilms
           .filter((film) => film.title.toLowerCase().includes(searchValue.toLowerCase()))

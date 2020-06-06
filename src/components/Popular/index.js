@@ -13,7 +13,7 @@ export const Popular = ({genres, favoritesFilms, sortMode, searchValue}) => {
 
   return (
     <>
-      {sortedFilms
+      {sortedFilms && sortedFilms
         .filter((film) => film.title.toLowerCase().includes(searchValue.toLowerCase())).length !== 0 ?
         sortedFilms
           .filter((film) => film.title.toLowerCase().includes(searchValue.toLowerCase()))

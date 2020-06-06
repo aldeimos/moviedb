@@ -21,7 +21,7 @@ export const FilmDetails = ({match}) => {
   useEffect(() => {
     API.getMovie(match.params.id)
       .then((details) => dispatch(loadFilmDetails(details)));
-  }, []);
+  }, [match.params.id]);
 
   const mapRecommendedFilms = () => {
     return popularFilms.filter((film) => {
@@ -30,8 +30,6 @@ export const FilmDetails = ({match}) => {
       }
     });
   };
-
-
 
   return (
     <div className="film-details">
@@ -56,7 +54,11 @@ export const FilmDetails = ({match}) => {
       </div>
       <div className="film-details__recommended-films">
         <h3>Recommended films:</h3>
-        {detailedFilm.genres && mapRecommendedFilms().map((recFilm) => <RecommendedFilm {...recFilm}/>)}
+        {detailedFilm.genres &&
+          mapRecommendedFilms()
+            .slice(0, 5)
+            .map((recFilm) => <RecommendedFilm key={recFilm.id} {...recFilm}/>)
+        }
       </div>
     </div>
   )

@@ -39,4 +39,23 @@
       margin-bottom: 15px;
     }
   }
+
+  &__recommended-films {
+    display: flex;
+    flex-wrap: wrap;
+
+    h3 {
+      width: 100%;
+      margin-bottom: 15px;
+    }
+
+    .recommended-film {
+      width: 180px;
+      height: 100px;
+
+      &:not(:last-child) {
+        margin-right: 22.5px;
+      }
+    }
+  }
 }
